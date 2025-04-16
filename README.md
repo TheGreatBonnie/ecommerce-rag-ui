@@ -47,22 +47,37 @@ src/
 ### Installation
 
 1. Clone the repository
+
 ```bash
-git clone <repository-url>
-cd ecommerce-frontend
+git clone https://github.com/TheGreatBonnie/ecommerce-rag-ui.git
+cd ecommerce-rag-ui
 ```
 
 2. Install dependencies
+
 ```bash
 pnpm install
 ```
 
-3. Start the development server
+3. Create a `.env` file in the root directory with the following variables:
+
+```
+NEXT_PUBLIC_CPK_PUBLIC_API_KEY="your_copilotkit_public_api_key"
+OPENAI_API_KEY="your_openai_api_key"
+```
+
+You need to obtain:
+
+- A CopilotKit public API key from [CopilotKit's website](https://cloud.copilotkit.ai/)
+- An OpenAI API key from [OpenAI's platform](https://platform.openai.com/)
+
+4. Start the development server
+
 ```bash
 pnpm dev
 ```
 
-4. Open [http://localhost:3000](http://localhost:3000) in your browser
+5. Open [http://localhost:3000](http://localhost:3000) in your browser
 
 ## Available Scripts
 
