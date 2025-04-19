@@ -13,27 +13,41 @@ import {
 import { Progress } from "@/components/Progress";
 
 export default function Home() {
+  /**
+   * Initialize and manage the AI assistant agent state
+   * useCoAgent hook creates and manages state for the CopilotKit assistant
+   *
+   * @property {string} name - Unique identifier for this agent instance
+   * @property {AgentState} initialState - Initial values for all agent state properties
+   */
   const { state, setState } = useCoAgent<AgentState>({
     name: "ecommerce_agent",
     initialState: {
-      // last_search_results: [],
-      logs: [],
-      processing_status: "idle",
-      current_query: "",
-      search_stage: "",
-      progress_percentage: 0,
-      active_filters: {},
-      matched_products_count: 0,
-      filtered_products_count: 0,
-      processing_time: 0,
-      search_history: [],
-      error_message: "",
+      logs: [], // Logs of agent actions for displaying progress
+      processing_status: "idle", // Current processing status of the agent
+      current_query: "", // The user's current search query
+      search_stage: "", // Current stage of the search process
+      progress_percentage: 0, // Progress indicator for current operation
+      active_filters: {}, // Applied filters for product search
+      matched_products_count: 0, // Number of products matching the search criteria
+      filtered_products_count: 0, // Number of products after applying filters
+      processing_time: 0, // Time taken to process the request
+      search_history: [], // History of previous searches
+      error_message: "", // Error message if something goes wrong
     },
   });
 
+  /**
+   * Configure how the agent state should be rendered in the UI
+   * This callback determines when and how to show the Progress component
+   *
+   * @property {string} name - Must match the agent name from useCoAgent
+   * @property {Function} render - Callback that returns JSX based on agent state
+   */
   useCoAgentStateRender({
     name: "ecommerce_agent",
     render: ({ state, nodeName, status }) => {
+      // Only show progress if there are logs or progress has started
       if (
         !state.logs ||
         (state.logs.length === 0 && state.progress_percentage === 0)

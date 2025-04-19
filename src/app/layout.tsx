@@ -22,18 +22,24 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
       <body className={inter.className}>
+        {/* CopilotKit wrapper provides AI capabilities throughout the app */}
         <CopilotKit
           publicApiKey={process.env.NEXT_PUBLIC_CPK_PUBLIC_API_KEY}
           agent="ecommerce_agent">
+          {/* ThemeProvider manages light/dark mode for the application */}
           <ThemeProvider
             attribute="class"
             defaultTheme="light"
             enableSystem
             disableTransitionOnChange>
+            {/* CartProvider manages the shopping cart state globally */}
             <CartProvider>
+              {/* Main navigation bar component */}
               <Navigation />
+              {/* Main content area with minimum height calculation to ensure footer positioning */}
               <div className="min-h-[calc(100vh-73px)]">{children}</div>
 
+              {/* Toast notifications component for displaying messages */}
               <Toaster />
             </CartProvider>
           </ThemeProvider>
